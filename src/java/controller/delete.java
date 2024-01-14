@@ -12,38 +12,39 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Account;
 
 /**
  *
  * @author Acer
  */
-public class LoginController extends HttpServlet {
+public class delete extends HttpServlet {
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
     }
 
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            //lay email pass word
-            String email = request.getParameter("txtemail");
-            String password = request.getParameter("txtpassword");
-            //check trong db cos email.pass nafy khong
-            AccountDao dao = new AccountDao();
-            Account acc = dao.getAccount(email, password);
-            System.out.println(acc);
-            if(acc!=null){
-                response.sendRedirect("adminHome.html");
-            }else{
-                response.sendRedirect("error.html");
-            }
-            
+        PrintWriter out = response.getWriter();
+        //get ve maid
+        String accoutnID= request.getParameter("txtid");
+        int id = Integer.parseInt(accoutnID.trim());
+        //su dung accoutDao de xoa data
+        out.print(id);
+        AccountDao dao = new AccountDao();
+        int success = dao.deleteById(accoutnID);
+        
+        out.print(success);
+        if(success > 0){  
+            response.sendRedirect("manageAccountController");
+        }else{
+            System.err.println("Error delete method() ");
+        }
     }
 
-
+    
 }

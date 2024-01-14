@@ -12,38 +12,41 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Account;
 
 /**
  *
  * @author Acer
  */
-public class LoginController extends HttpServlet {
+public class resetPassWordController extends HttpServlet {
 
+    
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        //lay ve
+        PrintWriter out = response.getWriter();
+        String accid= request.getParameter("accid");
+        
+        int id = Integer.parseInt(accid.substring(0, accid.length()-1));
+        
+        AccountDao dao = new AccountDao();
+        int result = 0;
+        result = dao.resetPass(id);
+        
+        if(result > 0){  
+            response.sendRedirect("manageAccountController");
+        }else{
+            System.err.println("Error delete method() ");
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            //lay email pass word
-            String email = request.getParameter("txtemail");
-            String password = request.getParameter("txtpassword");
-            //check trong db cos email.pass nafy khong
-            AccountDao dao = new AccountDao();
-            Account acc = dao.getAccount(email, password);
-            System.out.println(acc);
-            if(acc!=null){
-                response.sendRedirect("adminHome.html");
-            }else{
-                response.sendRedirect("error.html");
-            }
-            
+        
     }
-
 
 }

@@ -4,9 +4,33 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>controller.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>controller.delete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>resetPassWordController</servlet-name>
+        <servlet-class>controller.resetPassWordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/manageAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetPassWordController</servlet-name>
+        <url-pattern>/resetPassWordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
